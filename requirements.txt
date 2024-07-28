@@ -1,0 +1,5 @@
+Flask
+azure-ai-formrecognizer
+azure-core
+werkzeug
+Pillow
