@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Bill - Assign Items</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Coiny&family=Sono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Material Design Icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #292524;
+        color: #fafaf9;
+        font-family: "Sono", sans-serif;
+        padding: 48px 64px;
+      }
+
+      /* MAIN LAYOUT */
+      .container {
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+
+      .header {
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .main {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 48px;
+      }
+
+      @media (max-width: 900px) {
+        .main {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ELEMENTS */
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .logo img {
+        width: 68px;
+        height: 68px;
+      }
+
+      h1 {
+        font-size: 42px;
+        text-transform: uppercase;
+        font-family: "Coiny", sans-serif;
+        line-height: 1;
+        margin-top: 6px;
+      }
+
+      .category {
+        margin-bottom: 16px;
+      }
+
+      .fact {
+        font-size: 20px;
+        line-height: 1.4;
+        background-color: #44403c;
+        margin-bottom: 16px;
+        padding: 16px 24px;
+        letter-spacing: -1px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      @media (max-width: 1200px) {
+        .fact {
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 12px;
+        }
+      }
+
+      .tag {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-family: "Coiny", sans-serif;
+        padding-top: 3px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 100px;
+      }
+
+      .vote-buttons {
+        margin-left: auto;
+        flex-shrink: 0;
+        display: flex;
+        gap: 8px;
+      }
+
+      .vote-buttons button {
+        border: none;
+        background-color: #78716c;
+        font-size: 18px;
+        padding: 6px 12px;
+        border-radius: 100px;
+        color: inherit;
+        font-family: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .vote-buttons button:hover {
+        background-color: #292524;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      .source:link,
+      .source:visited {
+        color: #a8a29e;
+        text-decoration: none;
+        margin-left: 12px;
+        transition: 0.3s;
+      }
+
+      .source:hover,
+      .source:active {
+        color: #3b82f6;
+      }
+
+      .btn {
+        border: none;
+        font-family: "Coiny", sans-serif;
+        line-height: 1;
+        text-transform: uppercase;
+        font-size: 17px;
+        padding: 16px 0 13px;
+        background-image: linear-gradient(
+          135deg,
+          #3b82f6,
+      
+          
+          #eab308
+        );
+        color: inherit;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        transform: scale(110%) rotate(-2deg);
+      }
+
+      .btn-large {
+        font-size: 20px;
+        padding: 20px 32px 17px;
+      }
+
+      .btn-all-categories {
+        margin-bottom: 16px;
+        width: 100%;
+      }
+
+      .btn-category {
+        width: 100%;
+        background-image: none;
+      }
+
+      /* FORM */
+      .fact-form {
+        background-color: #44403c;
+        margin-bottom: 40px;
+        padding: 16px 32px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        border-radius: 16px;
+      }
+
+      .fact-form input,
+      .fact-form select {
+        width: 220px;
+        background-color: #78716c;
+        border: none;
+        border-radius: 100px;
+        padding: 16px;
+        font-size: 18px;
+        color: inherit;
+        font-family: inherit;
+      }
+
+      .fact-form input::placeholder {
+        color: #a8a29e;
+      }
+
+      .fact-form input:first-child {
+        flex-grow: 1;
+      }
+
+      .fact-form span {
+        font-weight: 600;
+        font-size: 18px;
+        margin-right: 18px;
+      }
+
+      @media (max-width: 1000px) {
+        body {
+          padding: 32px 48px;
+        }
+
+        .fact-form {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .fact-form input,
+        .fact-form select {
+          width: auto;
+        }
+      }
+
+      .hidden {
+        display: none;
+
+        body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 16px;
+}
+
+.card-upload {
+    width: 100%;
+    max-width: 400px; /* Adjust as needed */
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .card-upload {
+        margin: 0 16px;
+    }
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+
+      }
+    </style>
+  </head>
+  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=yes">
+
+    <div class="container">
+      <header class="header">
+        <div class="logo">
+          <img
+            src="https://img.icons8.com/cotton/64/000000/bill.png"
+            alt="Smart Bill Logo"
+          />
+          <h1>Smart Bill</h1>
+        </div>
+        <button class="btn btn-large button-open">Add People</button>
+      </header>
+
+      <form class="fact-form hidden" action="{{ url_for('assign') }}" method="post">
+        <input
+          type="text"
+          name="person_name"
+          placeholder="Enter person name"
+          required
+        />
+        <button class="btn btn-large" type="submit" name="add_person">
+          Add
+        </button>
+      </form>
+
+      <main class="main">
+        <aside>
+          <ul>
+            <h2>People</h2>
+            {% if assignments %}
+              {% for person in assignments.keys() %}
+                <li class="category">
+                  <button class="btn btn-category" style="background-color: #3b82f6">
+                    {{ person }}
+                  </button>
+                </li>
+              {% endfor %}
+            {% else %}
+              <p>No people added yet.</p>
+            {% endif %}
+          </ul>
+        </aside>
+
+        <section>
+          <h2>Assign Items</h2>
+          <form action="{{ url_for('assign') }}" method="post" class="fact-form">
+            <select name="item" required>
+              <option value="">Select Item</option>
+              {% for item in items %}
+                <option value="{{ item.name }}">
+                  {{ item.name }} - ${{ item.price }} x {{ item.quantity }}
+                </option>
+              {% endfor %}
+            </select>
+            <select name="person" multiple required>
+              <option value="">Select Person</option>
+              {% for person in assignments.keys() %}
+                <option value="{{ person }}">{{ person }}</option>
+              {% endfor %}
+            </select>
+            <button class="btn btn-large" type="submit" name="assign_item">Assign</button>
+          </form>
+          
+          <ul class="facts-list">
+            {% if assignments %}
+              {% for person, items in assignments.items() %}
+                <li class="fact">
+                  <p>
+                    <strong>{{ person }}</strong>
+                    <ul>
+                      {% for item in items %}
+                        <li>{{ item['name'] }} - Cost: ${{ item['cost'] }}</li>
+                      {% endfor %}
+                    </ul>
+                  </p>
+                </li>
+              {% endfor %}
+            {% else %}
+              <p>No assignments made yet.</p>
+            {% endif %}
+          </ul>
+          <h2>Totals</h2>
+          <ul class="facts-list">
+            {% if totals %}
+              {% for person, total in totals.items() %}
+                <li class="fact">
+                  <p><strong>{{ person }}</strong> - Total: ${{ total }}</p>
+                </li>
+              {% endfor %}
+            {% else %}
+              <p>No totals calculated yet.</p>
+            {% endif %}
+          </ul>
+        </section>
+        <button onclick="window.location.href='{{ url_for('index') }}'" class="btn btn-primary">
+          Delete Data
+      </button>
+      </main>
+    </div>
+
+    <!-- Bootstrap and jQuery JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      // Show or hide the form
+      document.querySelector(".button-open").addEventListener("click", function () {
+        document.querySelector(".fact-form").classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html>
